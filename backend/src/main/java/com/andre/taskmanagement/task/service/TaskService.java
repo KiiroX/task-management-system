@@ -2,6 +2,7 @@ package com.andre.taskmanagement.task.service;
 
 import com.andre.taskmanagement.task.entity.Task;
 import com.andre.taskmanagement.task.entity.TaskList;
+import com.andre.taskmanagement.task.exception.TaskNotFoundException;
 import com.andre.taskmanagement.task.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ public class TaskService {
 
     public Task findById(Long id) {
         return taskRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Task not found"));
+                .orElseThrow(() -> new TaskNotFoundException(id));
     }
 
     public Task create(Long taskListId, String title, String description) {
